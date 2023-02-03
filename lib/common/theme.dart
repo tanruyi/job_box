@@ -7,6 +7,7 @@ ThemeData appTheme = ThemeData(
       onPrimary: Color.fromARGB(255, 255, 255, 255),
       secondary: Color.fromARGB(255, 255, 245, 236),
       onSecondary: Color.fromARGB(255, 234, 158, 91),
+      tertiary: Color.fromARGB(255, 165, 158, 151),
       error: Color.fromARGB(255, 248, 224, 203),
       onError: Colors.red,
       background: Color.fromARGB(255, 255, 252, 250),

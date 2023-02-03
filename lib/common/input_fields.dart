@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 
 class TextInputFieldLabel extends StatelessWidget {
-  const TextInputFieldLabel({Key? key, required this.label}) : super(key: key);
+  const TextInputFieldLabel(
+      {Key? key, required this.label, this.topPadding = 24})
+      : super(key: key);
 
   final String label;
+  final double topPadding;
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 24.0, 0.0, 6.0),
+        padding: EdgeInsets.fromLTRB(0.0, topPadding, 0.0, 6.0),
         child: Text(label),
       ),
     );

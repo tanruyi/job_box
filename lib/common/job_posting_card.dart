@@ -3,10 +3,11 @@ import 'package:job_box/screens/application.dart';
 
 // FUNCTIONS
 
-handleApplyButtonClick(BuildContext context) {
+handleApplyButtonClick(BuildContext context, String companyName) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const ApplicationScreen()),
+    MaterialPageRoute(
+        builder: (context) => ApplicationScreen(companyName: companyName)),
   );
 }
 
@@ -75,8 +76,8 @@ class JobPostingDetailsModal extends StatelessWidget {
                   ),
                   Text(
                     "$area, Singapore",
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 165, 158, 151),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                   ),
                 ],
@@ -124,9 +125,10 @@ class JobPostingDetailsModal extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    handleApplyButtonClick(context);
+                    handleApplyButtonClick(context, companyName);
                   },
-                  style: ElevatedButton.styleFrom(fixedSize: Size(250, 35)),
+                  style:
+                      ElevatedButton.styleFrom(fixedSize: const Size(250, 35)),
                   child: const Text(
                     "Apply This Job",
                     style: TextStyle(fontWeight: FontWeight.bold),
@@ -213,8 +215,8 @@ class JobPostingCard extends StatelessWidget {
                   ),
                   Text(
                     postingDate,
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 165, 158, 151),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
                       fontSize: 10,
                     ),
                   ),
@@ -237,25 +239,25 @@ class JobPostingCard extends StatelessWidget {
               Row(
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.monetization_on,
-                    color: Color.fromARGB(255, 165, 158, 151),
+                    color: Theme.of(context).colorScheme.tertiary,
                     size: 16,
                   ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 16, 0),
                     child: Text(
                       "\$${minSalary}k-\$${maxSalary}k/month",
-                      style: const TextStyle(
-                        color: Color.fromARGB(255, 165, 158, 151),
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.tertiary,
                         fontSize: 12,
                       ),
                     ),
                   ),
                   Text(
                     "$area, Singapore",
-                    style: const TextStyle(
-                      color: Color.fromARGB(255, 165, 158, 151),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.tertiary,
                       fontSize: 12,
                     ),
                   ),

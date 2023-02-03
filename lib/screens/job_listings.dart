@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:job_box/common/job_posting_card.dart';
+import 'package:job_box/data/job_posting_board.dart';
+
+import '../data/job_posting.dart';
 
 class JobListingsScreenTitleBar extends StatelessWidget {
   const JobListingsScreenTitleBar({super.key});
@@ -70,34 +74,52 @@ class JobListingsScreenTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: PreferredSize(
-        preferredSize: _tabBar.preferredSize,
-        child: Material(
-          color: Theme.of(context).colorScheme.secondary,
-          child: _tabBar,
-        ),
+      child: Column(
+        children: [
+          PreferredSize(
+            preferredSize: _tabBar.preferredSize,
+            child: Material(
+              color: Theme.of(context).colorScheme.secondary,
+              child: _tabBar,
+            ),
+          ),
+          SingleChildScrollView(
+            child: SizedBox(
+              height: 457,
+              child: TabBarView(
+                children: [
+                  JobListingsScreenRecentJobsTab(),
+                  const Text("2nd view"),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class JobListingsScreenTabView extends StatelessWidget {
-  const JobListingsScreenTabView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const TabBarView(children: [
-      JobListingsScreenRecentJobsTab(),
-    ]);
-  }
-}
-
 class JobListingsScreenRecentJobsTab extends StatelessWidget {
-  const JobListingsScreenRecentJobsTab({super.key});
+  JobListingsScreenRecentJobsTab({super.key});
+
+  final List<JobPosting> allJobPostings =
+      jobPostingBoardInstance.allJobPostings;
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return ListView.builder(
+      itemCount: allJobPostings.length,
+      itemBuilder: (context, index) {
+        return JobPostingCard(
+            companyName: allJobPostings[index].companyName,
+            jobTitle: allJobPostings[index].jobTitle,
+            postingDate: allJobPostings[index].postingDate,
+            minSalary: allJobPostings[index].minSalary,
+            maxSalary: allJobPostings[index].maxSalary,
+            area: allJobPostings[index].area);
+      },
+    );
   }
 }
 
@@ -111,7 +133,6 @@ class JobListingsScreen extends StatelessWidget {
         children: const [
           JobListingsScreenTitleBar(),
           JobListingsScreenTabBar(),
-          JobListingsScreenTabView(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

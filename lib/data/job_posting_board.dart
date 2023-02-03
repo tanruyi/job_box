@@ -6,12 +6,22 @@ class JobPostingBoard {
   // method to add new job posting
   addJobPosting(String companyName, String jobTitle, String postingDate,
       int minSalary, int maxSalary, String area,
-      {String jobDescription = "", List<String>? requirements}) {
+      {String jobDescription = "",
+      List<String>? requirements,
+      String companyLogo = ""}) {
     var newJobPosting = requirements == null
         ? JobPosting(companyName.toUpperCase(), jobTitle, postingDate,
-            minSalary, maxSalary, area, jobDescription, [""])
-        : JobPosting(companyName.toUpperCase(), jobTitle, postingDate,
-            minSalary, maxSalary, area, jobDescription, requirements);
+            minSalary, maxSalary, area, jobDescription, [""], companyLogo)
+        : JobPosting(
+            companyName.toUpperCase(),
+            jobTitle,
+            postingDate,
+            minSalary,
+            maxSalary,
+            area,
+            jobDescription,
+            requirements,
+            companyLogo);
 
     allJobPostings.add(newJobPosting);
   }
@@ -29,7 +39,8 @@ final jobPostingBoardInstance = JobPostingBoard()
           "We're looking for a talented Lead Product Designer to join our rapidly growing design team to create intuitive and effective experiences for our customers as...",
       requirements: [
         "Developing product design concepts from client requirements"
-      ])
+      ],
+      companyLogo: "assets/images/slack.jpg")
   ..addJobPosting(
       "Crypto.com", "Front-End Developer", "09 Sept 2020", 5, 6, "Central")
   ..addJobPosting("Amazon", "Product Owner", "07 Sept 2020", 8, 10, "West")

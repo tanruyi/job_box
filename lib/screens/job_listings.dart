@@ -98,6 +98,7 @@ class JobListingsScreenTabBar extends StatelessWidget {
   }
 }
 
+// FIXME: currently unable to scroll
 class JobListingsScreenRecentJobsTab extends StatelessWidget {
   JobListingsScreenRecentJobsTab({super.key});
 
@@ -112,12 +113,16 @@ class JobListingsScreenRecentJobsTab extends StatelessWidget {
       itemCount: allJobPostings.length,
       itemBuilder: (context, index) {
         return JobPostingCard(
-            companyName: allJobPostings[index].companyName,
-            jobTitle: allJobPostings[index].jobTitle,
-            postingDate: allJobPostings[index].postingDate,
-            minSalary: allJobPostings[index].minSalary,
-            maxSalary: allJobPostings[index].maxSalary,
-            area: allJobPostings[index].area);
+          companyName: allJobPostings[index].companyName,
+          jobTitle: allJobPostings[index].jobTitle,
+          postingDate: allJobPostings[index].postingDate,
+          minSalary: allJobPostings[index].minSalary,
+          maxSalary: allJobPostings[index].maxSalary,
+          area: allJobPostings[index].area,
+          jobDescription: allJobPostings[index].jobDescription,
+          requirements: allJobPostings[index].requirements,
+          companyLogo: allJobPostings[index].companyLogo,
+        );
       },
     );
   }

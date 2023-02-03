@@ -37,7 +37,7 @@ class Profile extends ChangeNotifier {
   }
 
   addNewAppliedJob(newJob) {
-    appliedJobs?.add(newJob);
+    appliedJobs.add(newJob);
   }
 
   updateImage(newURL) {

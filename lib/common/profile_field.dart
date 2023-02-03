@@ -64,6 +64,7 @@ class ProfileDocCard extends StatelessWidget {
     return Container(
       height: 40,
       child: Card(
+        margin: EdgeInsets.zero,
         elevation: 0,
         color: Theme.of(context).colorScheme.secondary,
         child: ListTile(

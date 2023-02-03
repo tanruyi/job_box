@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:job_box/common/buttons.dart';
 import 'package:job_box/common/input_fields.dart';
 import 'package:job_box/models/profile.dart';
-import 'package:job_box/screens/job_listings.dart';
 import 'package:job_box/screens/sign_up.dart';
 import 'package:provider/provider.dart';
+
+import 'bottom_navigation.dart';
 
 // COMPONENTS
 class LoginScreenTitle extends StatelessWidget {
@@ -90,7 +91,7 @@ handleLoginButtonClick(BuildContext context, String email) {
 
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const JobListingsScreen()),
+    MaterialPageRoute(builder: (context) => const BottomNavigation()),
   );
 }
 

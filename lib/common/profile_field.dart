@@ -7,22 +7,25 @@ class ProfileSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          header,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+    return Container(
+      height: 30,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            header,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        IconButton(
-          // TODO: declare function to add edit info
-          onPressed: () {},
-          icon: const Icon(Icons.edit),
-        ),
-      ],
+          IconButton(
+            // TODO: declare function to add edit info
+            onPressed: () {},
+            icon: const Icon(Icons.edit),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -58,26 +61,30 @@ class ProfileDocCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      color: Theme.of(context).colorScheme.secondary,
-      child: ListTile(
-        leading: Icon(
-          Icons.description,
-          size: 40,
-          color: Theme.of(context).colorScheme.onBackground,
-        ),
-        title: Text(
-          fileName,
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground,
-              fontWeight: FontWeight.bold,
-              fontSize: 14),
-        ),
-        subtitle: Text(
-          uploadedDate,
-          style: TextStyle(
-              color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
+    return Container(
+      height: 40,
+      child: Card(
+        elevation: 0,
+        color: Theme.of(context).colorScheme.secondary,
+        child: ListTile(
+          leading: Icon(
+            Icons.description,
+            size: 40,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          title: Text(
+            fileName,
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+                fontWeight: FontWeight.bold,
+                fontSize: 14),
+          ),
+          subtitle: Text(
+            uploadedDate,
+            style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
+                fontSize: 10),
+          ),
         ),
       ),
     );

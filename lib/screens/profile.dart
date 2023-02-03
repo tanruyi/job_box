@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../common/profile_field.dart';
+import '../models/profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -28,6 +32,64 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Theme.of(context).colorScheme.onBackground,
             ),
           ],
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Consumer<Profile>(
+          builder: (context, profile, child) {
+            return Column(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).colorScheme.onBackground,
+                  radius: 50,
+                  child: CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    radius: 48,
+                    child: Text(
+                      "Add \nPhoto",
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.onBackground),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                const ProfileSectionHeader(header: "Contact Info"),
+                const ProfileFieldLabel(label: "Full Name"),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(profile.fullName),
+                ),
+                const ProfileFieldLabel(label: "Email"),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(profile.email),
+                ),
+                const ProfileFieldLabel(label: "Mobile Number"),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(profile.mobile),
+                ),
+                const ProfileSectionHeader(header: "Employment Information"),
+                const ProfileFieldLabel(label: "Resume"),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ProfileDocCard(
+                    fileName: profile.resume.fileName,
+                    uploadedDate: profile.resume.uploadedDate,
+                  ),
+                ),
+                const ProfileFieldLabel(label: "Cover Letter"),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: ProfileDocCard(
+                    fileName: profile.coverLetter.fileName,
+                    uploadedDate: profile.coverLetter.uploadedDate,
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

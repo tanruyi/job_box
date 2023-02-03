@@ -295,14 +295,20 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
                     child: Text(profile.fullName),
                   ),
                 ),
-                const ProfileFieldLabel(label: "Email"),
+                const ProfileFieldLabel(
+                  label: "Email",
+                  topPadding: 12,
+                ),
                 Consumer<Profile>(
                   builder: (context, profile, child) => Align(
                     alignment: Alignment.topLeft,
                     child: Text(profile.email),
                   ),
                 ),
-                const ProfileFieldLabel(label: "Mobile Number"),
+                const ProfileFieldLabel(
+                  label: "Mobile Number",
+                  topPadding: 12,
+                ),
                 Consumer<Profile>(
                   builder: (context, profile, child) => Align(
                     alignment: Alignment.topLeft,
@@ -310,7 +316,10 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
                   ),
                 ),
                 const ProfileSectionHeader(header: "Employment Information"),
-                const ProfileFieldLabel(label: "Resume"),
+                const ProfileFieldLabel(
+                  label: "Resume",
+                  topPadding: 12,
+                ),
                 Consumer<Profile>(
                   builder: (context, profile, child) => Align(
                     alignment: Alignment.topLeft,

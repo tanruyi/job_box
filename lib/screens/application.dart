@@ -4,7 +4,6 @@ import 'package:job_box/common/profile_field.dart';
 import 'package:job_box/data/job_posting.dart';
 import 'package:job_box/data/uploaded_document.dart';
 import 'package:job_box/models/profile.dart';
-import 'package:job_box/screens/applied_jobs.dart';
 import 'package:job_box/widgets/chip_field.dart';
 import 'package:job_box/widgets/doc_upload.dart';
 import 'package:job_box/common/input_fields.dart';
@@ -357,11 +356,10 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
                         var profile = context.read<Profile>();
                         profile.addNewAppliedJob(jobPosting);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AppliedJobsScreen()),
-                        );
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
+                        Navigator.pop(context);
                       },
                       label: "Submit"),
                 )

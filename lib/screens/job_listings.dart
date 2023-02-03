@@ -154,6 +154,7 @@ class _JobListingsScreenState extends State<JobListingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Center(
         child: _bodyOptions.elementAt(_selectedIndex),
       ),

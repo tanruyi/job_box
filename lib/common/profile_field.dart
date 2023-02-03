@@ -48,3 +48,38 @@ class ProfileFieldLabel extends StatelessWidget {
     );
   }
 }
+
+class ProfileDocCard extends StatelessWidget {
+  const ProfileDocCard(
+      {super.key, required this.fileName, required this.uploadedDate});
+
+  final String fileName;
+  final String uploadedDate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0,
+      color: Theme.of(context).colorScheme.secondary,
+      child: ListTile(
+        leading: Icon(
+          Icons.description,
+          size: 40,
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
+        title: Text(
+          fileName,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onBackground,
+              fontWeight: FontWeight.bold,
+              fontSize: 14),
+        ),
+        subtitle: Text(
+          uploadedDate,
+          style: TextStyle(
+              color: Theme.of(context).colorScheme.onBackground, fontSize: 10),
+        ),
+      ),
+    );
+  }
+}

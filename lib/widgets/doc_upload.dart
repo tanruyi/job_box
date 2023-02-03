@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:job_box/data/resumes.dart';
 import 'package:job_box/data/uploaded_document.dart';
 
 class UploadedDocCard extends StatelessWidget {
@@ -54,11 +53,13 @@ class DocUpload extends StatefulWidget {
       {super.key,
       required this.title,
       required this.instructions,
-      required this.allDocuments});
+      required this.allDocuments,
+      required this.updateSelectedDoc});
 
   final String title;
   final String instructions;
   final List<UploadedDocument> allDocuments;
+  final void Function(UploadedDocument) updateSelectedDoc;
 
   @override
   State<DocUpload> createState() => _DocUploadState();
@@ -108,6 +109,9 @@ class _DocUploadState extends State<DocUpload> {
                 onTap: () {
                   setState(() {
                     indexOfSelectedDoc = index;
+                    widget.updateSelectedDoc(UploadedDocument(
+                        widget.allDocuments[index].fileName,
+                        widget.allDocuments[index].uploadedDate));
                   });
                 },
                 child: UploadedDocCard(

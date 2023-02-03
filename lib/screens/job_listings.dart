@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:job_box/common/job_posting_card.dart';
 import 'package:job_box/data/job_posting_board.dart';
+import 'package:job_box/screens/applied_jobs.dart';
+import 'package:provider/provider.dart';
+import 'package:job_box/models/profile.dart';
 
 import '../data/job_posting.dart';
 
@@ -16,9 +19,9 @@ class JobListingsScreenTitleBar extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            "Hi Mark 👋🏻",
-          ),
+          Consumer<Profile>(
+              builder: (context, profile, child) =>
+                  Text("Hi ${profile.fullName} 👋🏻")),
           const Padding(
             padding: EdgeInsets.fromLTRB(0, 10.0, 0, 15),
             child: Text(
@@ -128,19 +131,41 @@ class JobListingsScreenRecentJobsTab extends StatelessWidget {
   }
 }
 
-class JobListingsScreen extends StatelessWidget {
+class JobListingsScreen extends StatefulWidget {
   const JobListingsScreen({super.key});
+
+  @override
+  State<JobListingsScreen> createState() => _JobListingsScreenState();
+}
+
+class _JobListingsScreenState extends State<JobListingsScreen> {
+  int _selectedIndex = 0;
+
+  static final List<Widget> _bodyOptions = [
+    Column(
+      children: const [
+        JobListingsScreenTitleBar(),
+        JobListingsScreenTabBar(),
+      ],
+    ),
+    const AppliedJobsScreen(),
+  ];
+
+  void _changeBody(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: const [
-          JobListingsScreenTitleBar(),
-          JobListingsScreenTabBar(),
-        ],
+      body: Center(
+        child: _bodyOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _changeBody,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.list_alt),

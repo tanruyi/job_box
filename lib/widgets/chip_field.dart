@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ChipField extends StatefulWidget {
-  const ChipField({super.key});
+  const ChipField({super.key, required this.updateSkills});
+
+  final void Function(List<String>) updateSkills;
 
   @override
   State<ChipField> createState() => _ChipFieldState();
@@ -45,10 +47,12 @@ class _ChipFieldState extends State<ChipField> {
                     selectedSkills.add("Figma");
                   }
                 });
+                widget.updateSkills(selectedSkills);
               },
               onDeleted: () {
                 if (selectedSkills.contains("Figma")) {
                   selectedSkills.remove("Figma");
+                  widget.updateSkills(selectedSkills);
                 }
               },
             ),

@@ -2,8 +2,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:job_box/common/buttons.dart';
 import 'package:job_box/common/input_fields.dart';
+import 'package:job_box/models/profile.dart';
 import 'package:job_box/screens/job_listings.dart';
 import 'package:job_box/screens/sign_up.dart';
+import 'package:provider/provider.dart';
 
 // COMPONENTS
 class LoginScreenTitle extends StatelessWidget {
@@ -82,7 +84,10 @@ class SignUpHyperlink extends StatelessWidget {
 
 // FUNCTIONS
 
-handleLoginButtonClick(BuildContext context) {
+handleLoginButtonClick(BuildContext context, String email) {
+  var profile = context.read<Profile>();
+  profile.updateEmail(email);
+
   Navigator.push(
     context,
     MaterialPageRoute(builder: (context) => const JobListingsScreen()),
@@ -91,8 +96,15 @@ handleLoginButtonClick(BuildContext context) {
 
 // SCREEN LAYOUT
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  String email = "";
 
   @override
   Widget build(BuildContext context) {
@@ -108,8 +120,18 @@ class LoginScreen extends StatelessWidget {
                 child: LoginScreenTitle(),
               ),
               const TextInputFieldLabel(label: "Email"),
-              // EmailInputField(),
-              const TextInputField(),
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  isDense: true,
+                ),
+                style: const TextStyle(fontSize: 12),
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                },
+              ),
               const TextInputFieldLabel(label: "Password"),
               const PasswordInputField(),
               const Padding(
@@ -120,7 +142,7 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: BaseButton(
                     handlePress: () {
-                      handleLoginButtonClick(context);
+                      handleLoginButtonClick(context, email);
                     },
                     label: "Login"),
               ),

@@ -83,15 +83,13 @@ class JobListingsScreenTabBar extends StatelessWidget {
               child: _tabBar,
             ),
           ),
-          SingleChildScrollView(
-            child: SizedBox(
-              height: 457,
-              child: TabBarView(
-                children: [
-                  JobListingsScreenRecentJobsTab(),
-                  const Text("2nd view"),
-                ],
-              ),
+          SizedBox(
+            height: 457,
+            child: TabBarView(
+              children: [
+                JobListingsScreenRecentJobsTab(),
+                const Center(child: Text("Coming soon")),
+              ],
             ),
           ),
         ],
@@ -109,6 +107,8 @@ class JobListingsScreenRecentJobsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
       itemCount: allJobPostings.length,
       itemBuilder: (context, index) {
         return JobPostingCard(

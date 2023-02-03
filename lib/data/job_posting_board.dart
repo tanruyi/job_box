@@ -6,9 +6,12 @@ class JobPostingBoard {
   // method to add new job posting
   addJobPosting(String companyName, String jobTitle, String postingDate,
       int minSalary, int maxSalary, String area,
-      {String? jobDescription, List<String>? requirements}) {
-    var newJobPosting = JobPosting(companyName.toUpperCase(), jobTitle,
-        postingDate, minSalary, maxSalary, area, jobDescription, requirements);
+      {String jobDescription = "", List<String>? requirements}) {
+    var newJobPosting = requirements == null
+        ? JobPosting(companyName.toUpperCase(), jobTitle, postingDate,
+            minSalary, maxSalary, area, jobDescription, [""])
+        : JobPosting(companyName.toUpperCase(), jobTitle, postingDate,
+            minSalary, maxSalary, area, jobDescription, requirements);
 
     allJobPostings.add(newJobPosting);
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:job_box/common/buttons.dart';
 import 'package:job_box/common/profile_field.dart';
+import 'package:job_box/data/job_posting.dart';
 import 'package:job_box/data/uploaded_document.dart';
 import 'package:job_box/models/profile.dart';
 import 'package:job_box/screens/applied_jobs.dart';
@@ -14,10 +15,9 @@ import 'package:job_box/data/resumes.dart';
 import 'package:provider/provider.dart';
 
 class ApplicationScreenUploadDocuments extends StatefulWidget {
-  const ApplicationScreenUploadDocuments(
-      {super.key, required this.companyName});
+  const ApplicationScreenUploadDocuments({super.key, required this.jobPosting});
 
-  final String companyName;
+  final JobPosting jobPosting;
 
   @override
   State<ApplicationScreenUploadDocuments> createState() =>
@@ -53,7 +53,7 @@ class _ApplicationScreenUploadDocumentsState
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Apply to ${widget.companyName}",
+                "Apply to ${widget.jobPosting.companyName}",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class _ApplicationScreenUploadDocumentsState
                       MaterialPageRoute(
                           builder: (context) =>
                               ApplicationScreenEmploymentInformation(
-                                companyName: widget.companyName,
+                                jobPosting: widget.jobPosting,
                               )),
                     );
                   },
@@ -111,9 +111,9 @@ class _ApplicationScreenUploadDocumentsState
 
 class ApplicationScreenEmploymentInformation extends StatefulWidget {
   const ApplicationScreenEmploymentInformation(
-      {super.key, required this.companyName});
+      {super.key, required this.jobPosting});
 
-  final String companyName;
+  final JobPosting jobPosting;
 
   @override
   State<ApplicationScreenEmploymentInformation> createState() =>
@@ -148,7 +148,7 @@ class _ApplicationScreenEmploymentInformationState
             Align(
               alignment: Alignment.topLeft,
               child: Text(
-                "Apply to ${widget.companyName}",
+                "Apply to ${widget.jobPosting.companyName}",
                 style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -218,7 +218,7 @@ class _ApplicationScreenEmploymentInformationState
                       MaterialPageRoute(
                           builder: (context) =>
                               ApplicationScreenReviewInformation(
-                                companyName: widget.companyName,
+                                jobPosting: widget.jobPosting,
                               )),
                     );
                   },
@@ -233,9 +233,9 @@ class _ApplicationScreenEmploymentInformationState
 
 class ApplicationScreenReviewInformation extends StatelessWidget {
   const ApplicationScreenReviewInformation(
-      {super.key, required this.companyName});
+      {super.key, required this.jobPosting});
 
-  final String companyName;
+  final JobPosting jobPosting;
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +262,7 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Apply to $companyName",
+                    "Apply to ${jobPosting.companyName}",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -354,6 +354,9 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 40),
                   child: BaseButton(
                       handlePress: () {
+                        var profile = context.read<Profile>();
+                        profile.addNewAppliedJob(jobPosting);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -370,12 +373,12 @@ class ApplicationScreenReviewInformation extends StatelessWidget {
 }
 
 class ApplicationScreen extends StatelessWidget {
-  const ApplicationScreen({super.key, required this.companyName});
+  const ApplicationScreen({super.key, required this.jobPosting});
 
-  final String companyName;
+  final JobPosting jobPosting;
 
   @override
   Widget build(BuildContext context) {
-    return ApplicationScreenUploadDocuments(companyName: companyName);
+    return ApplicationScreenUploadDocuments(jobPosting: jobPosting);
   }
 }

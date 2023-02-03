@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:job_box/data/job_posting.dart';
 import 'package:job_box/screens/application.dart';
 
 // FUNCTIONS
 
-handleApplyButtonClick(BuildContext context, String companyName) {
+handleApplyButtonClick(BuildContext context, JobPosting jobPosting) {
   Navigator.push(
     context,
     MaterialPageRoute(
-        builder: (context) => ApplicationScreen(companyName: companyName)),
+        builder: (context) => ApplicationScreen(jobPosting: jobPosting)),
   );
 }
 
@@ -15,20 +16,10 @@ handleApplyButtonClick(BuildContext context, String companyName) {
 class JobPostingDetailsModal extends StatelessWidget {
   const JobPostingDetailsModal({
     super.key,
-    required this.companyName,
-    required this.jobTitle,
-    required this.area,
-    required this.jobDescription,
-    required this.requirements,
-    required this.companyLogo,
+    required this.jobPosting,
   });
 
-  final String companyName;
-  final String jobTitle;
-  final String area;
-  final String jobDescription;
-  final List<String> requirements;
-  final String companyLogo;
+  final JobPosting jobPosting;
 
   @override
   Widget build(BuildContext context) {
@@ -51,13 +42,13 @@ class JobPostingDetailsModal extends StatelessWidget {
                 children: [
                   ClipRRect(
                     child: Image.asset(
-                      companyLogo,
+                      jobPosting.companyLogo,
                       width: 120,
                       height: 120,
                     ),
                   ),
                   Text(
-                    companyName,
+                    jobPosting.companyName,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -66,7 +57,7 @@ class JobPostingDetailsModal extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
                     child: Text(
-                      jobTitle,
+                      jobPosting.jobTitle,
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.onBackground,
                         fontWeight: FontWeight.bold,
@@ -75,7 +66,7 @@ class JobPostingDetailsModal extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$area, Singapore",
+                    "${jobPosting.area}, Singapore",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.tertiary,
                     ),
@@ -97,7 +88,7 @@ class JobPostingDetailsModal extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
-                    jobDescription,
+                    jobPosting.jobDescription,
                     style: const TextStyle(height: 1.7),
                   ),
                 ),
@@ -111,9 +102,9 @@ class JobPostingDetailsModal extends StatelessWidget {
                 ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    itemCount: requirements.length,
+                    itemCount: jobPosting.requirements.length,
                     itemBuilder: (context, index) {
-                      return Text("-${requirements[index]}");
+                      return Text("-${jobPosting.requirements[index]}");
                     })
               ],
             ),
@@ -125,7 +116,7 @@ class JobPostingDetailsModal extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    handleApplyButtonClick(context, companyName);
+                    handleApplyButtonClick(context, jobPosting);
                   },
                   style:
                       ElevatedButton.styleFrom(fixedSize: const Size(250, 35)),
@@ -157,26 +148,10 @@ class JobPostingDetailsModal extends StatelessWidget {
 class JobPostingCard extends StatelessWidget {
   const JobPostingCard({
     super.key,
-    required this.companyName,
-    required this.jobTitle,
-    required this.postingDate,
-    required this.minSalary,
-    required this.maxSalary,
-    required this.area,
-    required this.jobDescription,
-    required this.requirements,
-    required this.companyLogo,
+    required this.jobPosting,
   });
 
-  final String companyName;
-  final String jobTitle;
-  final String postingDate;
-  final int minSalary;
-  final int maxSalary;
-  final String area;
-  final String jobDescription;
-  final List<String> requirements;
-  final String companyLogo;
+  final JobPosting jobPosting;
 
   @override
   Widget build(BuildContext context) {
@@ -188,12 +163,7 @@ class JobPostingCard extends StatelessWidget {
             backgroundColor: Colors.transparent,
             builder: (BuildContext context) {
               return JobPostingDetailsModal(
-                companyName: companyName,
-                jobTitle: jobTitle,
-                area: area,
-                jobDescription: jobDescription,
-                requirements: requirements,
-                companyLogo: companyLogo,
+                jobPosting: jobPosting,
               );
             });
       },
@@ -206,7 +176,7 @@ class JobPostingCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    companyName,
+                    jobPosting.companyName,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -214,7 +184,7 @@ class JobPostingCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    postingDate,
+                    jobPosting.postingDate,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.tertiary,
                       fontSize: 10,
@@ -227,7 +197,7 @@ class JobPostingCard extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 10, 0, 15),
                   child: Text(
-                    jobTitle,
+                    jobPosting.jobTitle,
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onBackground,
                       fontWeight: FontWeight.bold,
@@ -247,7 +217,7 @@ class JobPostingCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8, 0, 16, 0),
                     child: Text(
-                      "\$${minSalary}k-\$${maxSalary}k/month",
+                      "\$${jobPosting.minSalary}k-\$${jobPosting.maxSalary}k/month",
                       style: TextStyle(
                         color: Theme.of(context).colorScheme.tertiary,
                         fontSize: 12,
@@ -255,7 +225,7 @@ class JobPostingCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$area, Singapore",
+                    "${jobPosting.area}, Singapore",
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.tertiary,
                       fontSize: 12,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:job_box/common/job_posting_card.dart';
 import 'package:job_box/data/job_posting_board.dart';
 import 'package:job_box/screens/applied_jobs.dart';
+import 'package:job_box/screens/profile.dart';
 import 'package:provider/provider.dart';
 import 'package:job_box/models/profile.dart';
 
@@ -116,15 +117,7 @@ class JobListingsScreenRecentJobsTab extends StatelessWidget {
       itemCount: allJobPostings.length,
       itemBuilder: (context, index) {
         return JobPostingCard(
-          companyName: allJobPostings[index].companyName,
-          jobTitle: allJobPostings[index].jobTitle,
-          postingDate: allJobPostings[index].postingDate,
-          minSalary: allJobPostings[index].minSalary,
-          maxSalary: allJobPostings[index].maxSalary,
-          area: allJobPostings[index].area,
-          jobDescription: allJobPostings[index].jobDescription,
-          requirements: allJobPostings[index].requirements,
-          companyLogo: allJobPostings[index].companyLogo,
+          jobPosting: allJobPostings[index],
         );
       },
     );
@@ -149,6 +142,7 @@ class _JobListingsScreenState extends State<JobListingsScreen> {
       ],
     ),
     const AppliedJobsScreen(),
+    const ProfileScreen(),
   ];
 
   void _changeBody(int index) {

@@ -85,7 +85,7 @@ class SignUpHyperlink extends StatelessWidget {
 handleLoginButtonClick(BuildContext context) {
   Navigator.push(
     context,
-    MaterialPageRoute(builder: (context) => const JobListingsPage()),
+    MaterialPageRoute(builder: (context) => const JobListingsScreen()),
   );
 }
 

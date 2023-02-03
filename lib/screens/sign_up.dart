@@ -126,7 +126,7 @@ class RetypePasswordField extends StatelessWidget {
       enableSuggestions: false,
       autocorrect: false,
       obscureText: true,
-      style: const TextStyle(fontSize: 12),
+      style: TextStyle(fontSize: 12),
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         isDense: true,

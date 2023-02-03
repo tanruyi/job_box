@@ -27,4 +27,13 @@ ThemeData appTheme = ThemeData(
       backgroundColor: const Color.fromARGB(255, 234, 158, 91),
     ),
   ),
+  tabBarTheme: const TabBarTheme(
+    labelColor: Color.fromARGB(255, 234, 158, 91),
+    unselectedLabelColor: Color.fromARGB(255, 201, 194, 189),
+    indicatorColor: Color.fromARGB(255, 234, 158, 91),
+    labelStyle: TextStyle(
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Bitter',
+    ),
+  ),
 );

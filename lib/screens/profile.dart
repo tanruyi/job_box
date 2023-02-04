@@ -70,12 +70,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   alignment: Alignment.topLeft,
                   child: Text(profile.mobile),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: const ProfileSectionHeader(
-                      header: "Employment Information"),
+                const Padding(
+                  padding: EdgeInsets.only(top: 16.0),
+                  child: ProfileSectionHeader(header: "Employment Information"),
                 ),
-                const ProfileFieldLabel(label: "Resume", topPadding: 8,),
+                const ProfileFieldLabel(
+                  label: "Resume",
+                  topPadding: 8,
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: ProfileDocCard(
@@ -83,7 +85,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     uploadedDate: profile.resume.uploadedDate,
                   ),
                 ),
-                const ProfileFieldLabel(label: "Cover Letter", topPadding: 30,),
+                const ProfileFieldLabel(
+                  label: "Cover Letter",
+                  topPadding: 30,
+                ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: ProfileDocCard(
